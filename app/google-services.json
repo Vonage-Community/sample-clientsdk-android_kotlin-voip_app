@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "631002873944",
+    "project_id": "voicedemoapp-2d602",
+    "storage_bucket": "voicedemoapp-2d602.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:631002873944:android:e2e92e861171a3c1320a2d",
+        "android_client_info": {
+          "package_name": "com.example.vonage.voicedemoapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "631002873944-7puti8c6rfd5s5nev0p489geackf28n1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOFMzqtLRln62c0lbx8HcwqMMR2VZi0FM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "631002873944-7puti8c6rfd5s5nev0p489geackf28n1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:631002873944:android:dc9cb0d47b26c4c9320a2d",
+        "android_client_info": {
+          "package_name": "com.example.vonage.voicesampleapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "631002873944-7puti8c6rfd5s5nev0p489geackf28n1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOFMzqtLRln62c0lbx8HcwqMMR2VZi0FM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "631002873944-7puti8c6rfd5s5nev0p489geackf28n1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

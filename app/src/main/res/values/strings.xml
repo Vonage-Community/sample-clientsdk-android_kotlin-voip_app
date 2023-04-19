@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">VoiceSampleApp</string>
+    <string name="logo_description">Logo</string>
+    <string name="token_hint">Token</string>
+    <string name="login_text">Login</string>
+    <string name="btn_outbound_call_text">Start Outbound Call</string>
+    <string name="user_avatar_description">User Avatar</string>
+    <string name="dialer_btn_one">1</string>
+    <string name="dialer_btn_two">2</string>
+    <string name="dialer_btn_three">3</string>
+    <string name="dialer_btn_four">4</string>
+    <string name="dialer_btn_five">5</string>
+    <string name="dialer_btn_six">6</string>
+    <string name="dialer_btn_seven">7</string>
+    <string name="dialer_btn_eight">8</string>
+    <string name="dialer_btn_nine">9</string>
+    <string name="dialer_btn_zero">0</string>
+    <string name="dialer_btn_pound">#</string>
+    <string name="dialer_btn_star">*</string>
+    <string name="dialer_btn_call">CALL</string>
+    <string name="dialer_btn_send_dtmf">SEND</string>
+    <string name="backspace_button_content_description">Backspace</string>
+    <string name="dialer_button_backspace">⌫</string>
+    <string name="call_state_ringing_label">Ringing…</string>
+    <string name="call_state_active_label">Active</string>
+    <string name="call_state_remotely_disconnected_label">Remotely Disconnected</string>
+    <string name="call_state_locally_disconnected_label">Hung Up</string>
+    <string name="keypad_button_description">Keypad</string>
+    <string name="mute_button_description">Mute</string>
+    <string name="hangup_button_description">Hangup</string>
+    <string name="dismiss_button_content_description">Dismiss</string>
+    <string name="logged_username_default">Logged Username</string>
+    <string name="logout_label">Logout</string>
+    <string name="edit_username_hint">Enter username here</string>
+    <string name="button_call_user_label">Call</string>
+</resources>

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="vertical">
+
+        <RelativeLayout
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/button_dismiss"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dismiss_button_content_description"
+                    app:fabSize="mini"
+                    android:src="@drawable/ic_close"
+                    app:backgroundTint="@color/gray"
+                    app:tint="?attr/colorOnPrimary"
+                    android:contentDescription="@string/dismiss_button_content_description"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"/>
+
+            <TextView
+                    android:id="@+id/dialed_number_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textAlignment="center"
+                    android:layout_toStartOf="@+id/button_backspace"
+                    android:layout_toEndOf="@+id/button_dismiss"
+                    android:textSize="32sp"
+                    android:layout_centerVertical="true"/>
+
+            <Button
+                    android:id="@+id/button_backspace"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dialer_button_backspace"
+                    android:backgroundTint="@color/red"
+                    android:textSize="24sp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@string/backspace_button_content_description"/>
+        </RelativeLayout>
+
+        <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="3"
+                android:rowCount="4"
+                android:useDefaultMargins="true">
+
+            <Button
+                    android:id="@+id/button_1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:text="@string/dialer_btn_one"
+                    android:textSize="32sp" />
+
+            <Button
+                    android:id="@+id/button_2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:text="@string/dialer_btn_two"
+                    android:textSize="32sp" />
+
+            <Button
+                    android:id="@+id/button_3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:text="@string/dialer_btn_three"
+                    android:textSize="32sp" />
+
+            <Button
+                    android:id="@+id/button_4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:text="@string/dialer_btn_four"
+                    android:textSize="32sp" />
+
+            <Button
+                    android:id="@+id/button_5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:text="@string/dialer_btn_five"
+                    android:textSize="32sp" />
+
+            <Button
+                    android:id="@+id/button_6"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:text="@string/dialer_btn_six"
+                    android:textSize="32sp" />
+
+            <Button
+                    android:id="@+id/button_7"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:text="@string/dialer_btn_seven"
+                    android:textSize="32sp" />
+
+            <Button
+                    android:id="@+id/button_8"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:text="@string/dialer_btn_eight"
+                    android:textSize="32sp" />
+
+            <Button
+                    android:id="@+id/button_9"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:text="@string/dialer_btn_nine"
+                    android:textSize="32sp" />
+            <Button
+                android:id="@+id/button_star"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:text="@string/dialer_btn_star"
+                android:textSize="32sp" />
+
+            <Button
+                    android:id="@+id/button_0"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:text="@string/dialer_btn_zero"
+                    android:textSize="32sp" />
+
+            <Button
+                    android:id="@+id/button_pound"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:text="@string/dialer_btn_pound"
+                    android:textSize="32sp" />
+
+            <Button
+                    android:id="@+id/button_call"
+                    android:backgroundTint="@color/green"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnSpan="3"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:text="@string/dialer_btn_call"
+                    android:textSize="32sp" />
+
+        </GridLayout>
+    </LinearLayout>
+</layout>
