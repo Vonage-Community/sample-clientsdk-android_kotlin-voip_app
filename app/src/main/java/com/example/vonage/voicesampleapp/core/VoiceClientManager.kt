@@ -71,8 +71,8 @@ class VoiceClientManager(private val context: Context) {
             }
         }
 
-        client.setOnCallHangupListener { callId, callQuality, isRemote ->
-            println("Call $callId has been ${if(isRemote) "remotely" else "locally"} hung up with quality: $callQuality")
+        client.setOnCallHangupListener { callId, callQuality, reason ->
+            println("Call $callId has been $reason up with quality: $callQuality")
             takeIfActive(callId)?.apply {
                 val cause = if(isRemote) DisconnectCause(DisconnectCause.REMOTE) else DisconnectCause(DisconnectCause.LOCAL)
                 setDisconnected(cause)
