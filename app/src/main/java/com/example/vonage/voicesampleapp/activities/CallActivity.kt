@@ -8,25 +8,33 @@ import android.content.res.ColorStateList
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.telecom.Connection
+import android.view.View
 import com.example.vonage.voicesampleapp.App
 import com.example.vonage.voicesampleapp.R
 import com.example.vonage.voicesampleapp.databinding.ActivityCallBinding
+import com.example.vonage.voicesampleapp.utils.Constants
 import com.example.vonage.voicesampleapp.utils.showDialerFragment
+import com.example.vonage.voicesampleapp.utils.turnKeyguardOff
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.vonage.clientcore.core.api.models.Username
+import com.vonage.clientcore.core.conversation.VoiceChannelType
 
 class CallActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCallBinding
     private val coreContext = App.coreContext
     private val clientManager = coreContext.clientManager
+    private val notificationManager = coreContext.notificationManager
+    private val telecomHelper = coreContext.telecomHelper
     private var isMuteToggled = false
 
     /**
      * When an Active Call gets disconnected
      * (either remotely or locally) it will be null.
-     * Hence, we use this variable to check
-     * if the hang-up was local (STATE_DISCONNECTED) or remote (null).
+     * Hence, we use these variables to manually update the UI in that case
      */
     private var fallbackState: Int? = null
+
+    private var fallbackUsername: Username? = null
 
     /**
      * This Local BroadcastReceiver will be used
@@ -59,21 +67,37 @@ class CallActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCallBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setButtonListeners()
+        handleIntent(intent)
         setBindings()
         registerReceiver(messageReceiver, IntentFilter(MESSAGE_ACTION))
-    }
-
-    override fun onResume() {
-        super.onResume()
-        coreContext.activeCall ?: run {
-            finish()
-        }
     }
 
     override fun onDestroy() {
         super.onDestroy()
         unregisterReceiver(messageReceiver)
+    }
+
+    /**
+     * An Intent with extras will be received if
+     * the App received an incoming call while device was locked.
+     */
+    private fun handleIntent(intent: Intent?){
+        intent ?: return
+        val callId = intent.getStringExtra(Constants.EXTRA_KEY_CALL_ID) ?: return
+        val from = intent.getStringExtra(Constants.EXTRA_KEY_FROM) ?: return
+        val typeString = intent.getStringExtra(Constants.EXTRA_KEY_CHANNEL_TYPE) ?: return
+        val type = VoiceChannelType.valueOf(typeString)
+        fallbackUsername = from
+        fallbackState = Connection.STATE_RINGING
+        turnKeyguardOff {
+            if(notificationManager.isIncomingCallNotificationActive){
+                notificationManager.dismissIncomingCallNotification(callId)
+                telecomHelper.startIncomingCall(callId, from, type)
+            } else {
+                // If the Notification has been canceled in the meantime
+                this.finish()
+            }
+        }
     }
 
     private fun setBindings(){
@@ -84,6 +108,8 @@ class CallActivity : AppCompatActivity() {
 
     private fun setButtonListeners() = binding.run{
         // Button Listeners
+        btnAnswer.setOnClickListener { onAnswer() }
+        btnReject.setOnClickListener { onReject() }
         btnHangup.setOnClickListener { onHangup() }
         btnMute.setOnClickListener { onMute() }
         btnKeypad.setOnClickListener { onKeypad() }
@@ -91,23 +117,47 @@ class CallActivity : AppCompatActivity() {
 
     private fun setUserUI() = binding.run{
         // Username Label
-        userName.text = coreContext.activeCall?.callerDisplayName
+        userName.text = coreContext.activeCall?.callerDisplayName ?: fallbackUsername
     }
 
     private fun setStateUI() = binding.run {
+        val state = coreContext.activeCall?.state ?: fallbackState
+        //Buttons Visibility
+        if(state == Connection.STATE_RINGING){
+            btnAnswer.visibility = View.VISIBLE
+            btnReject.visibility = View.VISIBLE
+            btnHangup.visibility = View.GONE
+            btnMute.visibility = View.GONE
+            btnKeypad.visibility = View.GONE
+        }
+        else {
+            btnAnswer.visibility = View.GONE
+            btnReject.visibility = View.GONE
+            btnHangup.visibility = View.VISIBLE
+            btnMute.visibility = View.VISIBLE
+            btnKeypad.visibility = View.VISIBLE
+        }
         //Background Color and State label
-        val (backgroundColor, stateLabel) = when(coreContext.activeCall?.state ?: fallbackState) {
-            Connection.STATE_RINGING, Connection.STATE_DIALING -> R.color.gray to R.string.call_state_ringing_label
+        val (backgroundColor, stateLabel) = when(state) {
+            Connection.STATE_RINGING -> R.color.gray to R.string.call_state_ringing_label
+            Connection.STATE_DIALING -> R.color.gray to R.string.call_state_dialing_label
             Connection.STATE_ACTIVE -> R.color.green to R.string.call_state_active_label
             Connection.STATE_DISCONNECTED -> R.color.red to R.string.call_state_remotely_disconnected_label
-            null -> R.color.red to R.string.call_state_locally_disconnected_label
-            else -> null to null
+            else -> R.color.red to R.string.call_state_locally_disconnected_label
         }
-        backgroundColor?.let {
-            cardView.setCardBackgroundColor(getColor(it))
+        cardView.setCardBackgroundColor(getColor(backgroundColor))
+        callState.text = getString(stateLabel)
+    }
+
+    private fun onAnswer(){
+        coreContext.activeCall?.let { call ->
+            clientManager.answerCall(call)
         }
-        stateLabel?.let {
-            callState.text = getString(it)
+    }
+
+    private fun onReject(){
+        coreContext.activeCall?.let { call ->
+            clientManager.rejectCall(call)
         }
     }
 

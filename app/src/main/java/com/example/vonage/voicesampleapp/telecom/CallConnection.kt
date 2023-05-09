@@ -61,7 +61,14 @@ class CallConnection(val callId: CallId) : Connection() {
         destroy()
     }
 
-    fun clearActiveCall(){
+    fun disconnect(disconnectCause: DisconnectCause){
+        println("[$callId] Connection is being disconnected with cause [$disconnectCause]")
+        setDisconnected(disconnectCause)
+        clearActiveCall()
+        destroy()
+    }
+
+    private fun clearActiveCall(){
         // Reset active call only if it was the current one
         coreContext.activeCall?.takeIf { it == this }?.let { coreContext.activeCall = null }
     }

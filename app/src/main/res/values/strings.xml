@@ -22,6 +22,7 @@
     <string name="backspace_button_content_description">Backspace</string>
     <string name="dialer_button_backspace">⌫</string>
     <string name="call_state_ringing_label">Ringing…</string>
+    <string name="call_state_dialing_label">Dialing…</string>
     <string name="call_state_active_label">Active</string>
     <string name="call_state_remotely_disconnected_label">Remotely Disconnected</string>
     <string name="call_state_locally_disconnected_label">Hung Up</string>
@@ -33,4 +34,6 @@
     <string name="logout_label">Logout</string>
     <string name="edit_username_hint">Enter username here</string>
     <string name="button_call_user_label">Call</string>
+    <string name="answer_button_description">Answer</string>
+    <string name="reject_button_description">Reject</string>
 </resources>

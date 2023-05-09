@@ -12,7 +12,20 @@ class PushNotificationService : FirebaseMessagingService() {
         App.coreContext.pushToken = token
     }
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
-        // When an incoming call comes in, notify the ClientManager
-        App.coreContext.clientManager.processIncomingPush(remoteMessage)
+        // Whenever a Push Notification comes in
+        // If there is no active session then
+        // Create one using the latest valid Auth Token and notify the ClientManager
+        // Else notify the ClientManager directly
+        App.coreContext.run {
+            if (sessionId == null) {
+                val token = authToken ?: return@run
+                val username = username ?: return@run
+                clientManager.login(username, token) {
+                    clientManager.processIncomingPush(remoteMessage)
+                }
+            } else {
+                clientManager.processIncomingPush(remoteMessage)
+            }
+        }
     }
 }

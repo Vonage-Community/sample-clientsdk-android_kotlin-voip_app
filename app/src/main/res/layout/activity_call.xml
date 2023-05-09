@@ -69,6 +69,27 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             app:fabSize="normal"
+                            android:visibility="gone"
+                            android:id="@+id/btn_answer"
+                            app:backgroundTint="@color/green"
+                            app:tint="@color/white"
+                            app:srcCompat="@drawable/call_answer"
+                            android:contentDescription="@string/answer_button_description"/>
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:fabSize="normal"
+                            android:visibility="gone"
+                            android:layout_marginStart="48dp"
+                            android:id="@+id/btn_reject"
+                            app:backgroundTint="@color/red"
+                            app:tint="@color/white"
+                            app:srcCompat="@drawable/call_reject"
+                            android:contentDescription="@string/reject_button_description"/>
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:fabSize="normal"
                             android:id="@+id/btn_mute"
                             app:backgroundTint="@color/white"
                             app:tint="@color/gray"

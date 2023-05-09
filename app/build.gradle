@@ -55,7 +55,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging-ktx'
 
     // Vonage Client SDK
-    implementation("com.vonage:client-sdk-voice:1.0.0-alpha.0")
+    implementation("com.vonage:client-sdk-voice:1.0.0")
 
     // Retrofit + Moshi (HTTP Client)
     def retrofit_version = "2.9.0"

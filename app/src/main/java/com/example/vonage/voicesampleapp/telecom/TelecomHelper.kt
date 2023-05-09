@@ -5,6 +5,7 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.drawable.Icon
 import android.net.Uri
 import android.os.Bundle
 import android.telecom.PhoneAccount
@@ -12,9 +13,11 @@ import android.telecom.PhoneAccountHandle
 import android.telecom.TelecomManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import com.example.vonage.voicesampleapp.R
 import com.example.vonage.voicesampleapp.utils.Constants
 import com.example.vonage.voicesampleapp.utils.showToast
 import com.vonage.clientcore.core.api.models.Username
+import com.vonage.clientcore.core.conversation.VoiceChannelType
 import com.vonage.voice.api.CallId
 
 typealias PhoneNumber = String
@@ -53,6 +56,7 @@ class TelecomHelper(private val context: Context) {
         PhoneAccount
             .builder(phoneAccountHandle, CUSTOM_PHONE_ACCOUNT_NAME)
             .setCapabilities(PhoneAccount.CAPABILITY_CALL_PROVIDER)
+            .setIcon(Icon.createWithResource(context, R.drawable.vonage_logo_svg))
             .build()
             .also {
                 telecomManager.registerPhoneAccount(it)
@@ -80,7 +84,7 @@ class TelecomHelper(private val context: Context) {
     /**
      * This method triggers the connection service and shows the System Incoming Call UI to handle incoming calls.
      */
-    fun startIncomingCall(callId:CallId, from:Username, type:String){
+    fun startIncomingCall(callId:CallId, from:Username, type:VoiceChannelType){
         println(("Call from: ${from}, via channel $callId, channelType: $type"))
         val extras = Bundle()
         extras.putString(Constants.EXTRA_KEY_CALL_ID, callId)

@@ -12,10 +12,27 @@ class CoreContext private constructor(context: Context) {
     private val applicationContext: Context = context.applicationContext
     val telecomHelper: TelecomHelper by lazy { TelecomHelper(applicationContext) }
     val clientManager: VoiceClientManager by lazy { VoiceClientManager(applicationContext) }
-    var authToken: String? = null
-    var username: String? = null
+    val notificationManager: InternalNotificationManager by lazy { InternalNotificationManager(applicationContext) }
     var sessionId: String? = null
     var activeCall:CallConnection? = null
+
+    /**
+     * The last valid Username used to create a session.
+     */
+    var username: String? get() {
+        return PrivatePreferences.get(PrivatePreferences.USERNAME, applicationContext)
+    } set(value) {
+        PrivatePreferences.set(PrivatePreferences.USERNAME, value, applicationContext)
+    }
+
+    /**
+     * The last valid Vonage API Token used to create a session.
+     */
+    var authToken: String? get() {
+        return PrivatePreferences.get(PrivatePreferences.AUTH_TOKEN, applicationContext)
+    } set(value) {
+        PrivatePreferences.set(PrivatePreferences.AUTH_TOKEN, value, applicationContext)
+    }
 
     /**
      * The Firebase Push Token obtained via PushNotificationService.
